@@ -27,11 +27,11 @@ Currently, you will find the following transforms :
 
 Checkout the project in a directory of your choice : 
 
-     git clone REPOSITORY
+     git clone https://github.com/Reflets-info/maltego-tools.git
      
 Go to the directory, create the virtual environnement and install the dependencies :
 
-     cd investigation-tools/reflets-transforms
+     cd maltego-tools/reflets-transforms/
      
      python3 -m venv venv_reflets
      source ./venv_reflets/bin/activate
