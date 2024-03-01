@@ -1,6 +1,7 @@
 import copy
 import json
 import sys
+import yaml
 
 import requests
 
@@ -9,11 +10,6 @@ from maltego_trx.entities import Company
 from maltego_trx.maltego import UIM_TYPES, MaltegoMsg, MaltegoTransform
 from maltego_trx.transform import DiscoverableTransform
 
-# Base parameters for the API
-payload_config = {
-    'api_token': 'PUT_YOUR_API_KEY_HERE', 
-    'par_page': '20'    
-}
 
 # Apply filters on search result to get only pertinent results
 def do_filter_entity( request , dirigeant ) :
@@ -91,10 +87,15 @@ class PersonPappers(DiscoverableTransform):
         # This variable is used to limit the number of page browsed. At None, browss all the pages
         limit_page = 5
         current_page = 1
-        
+        payload_tpl = {}
+
         # DIRIGEANT SEARCH TERMS 
         # Using most precise key info to get the good guy
-        payload_tpl = copy.deepcopy(payload_config)
+        with open('./transforms/api_keys.yml', 'r') as file :
+            config = yaml.safe_load(file)
+            
+        payload_tpl['api_token'] = config['pappers']['api_key']
+        payload_tpl['par_page'] = '20'
 
         # If we know several "prenoms", we search with them
         if request.getProperty('prenoms') is not None :        
@@ -168,8 +169,10 @@ class PersonPappers(DiscoverableTransform):
         
         # BENEFICIAIRE SEARCH TERMS 
         # Using most precise key info to get the good guy
-        
-        payload_tpl = copy.deepcopy(payload_config)
+        payload_tpl = {}
+        payload_tpl['api_token'] = config['pappers']['api_key']
+        payload_tpl['par_page'] = '20'
+
         # If we know several "prenoms", we search with them
         if request.getProperty('prenoms') is not None :        
             payload_tpl['q'] = request.getProperty('prenoms') + " " + request.getProperty('lastname')

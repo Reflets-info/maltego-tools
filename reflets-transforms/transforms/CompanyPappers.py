@@ -3,6 +3,7 @@
 import json
 import pickle
 import sys
+import yaml
 
 import requests
 
@@ -11,10 +12,6 @@ from maltego_trx.entities import Company
 from maltego_trx.maltego import UIM_TYPES, MaltegoMsg, MaltegoTransform
 from maltego_trx.transform import DiscoverableTransform
 
-# Base parameters for the API
-payload_config = {
-    'api_token': 'PUT_YOUR_API_KEY_HERE'    
-}
 
 @registry.register_transform(display_name="Fiche company", input_entity="reflets.DetailedCompany",
                              description='Get detailed info about company',
@@ -31,7 +28,11 @@ class CompanyPappers(DiscoverableTransform):
         try:
             # DIRIGEANT SEARCH TERMS 
             # Using most precise key info to get the good guy
-            payload = payload_config
+            payload = {}
+            with open('./transforms/api_keys.yml', 'r') as file :
+              config = yaml.safe_load(file)
+            
+            payload['api_token'] = config['pappers']['api_key']
             payload['siren'] = siren
 
             page = requests.get("https://api.pappers.fr/v2/entreprise", params=payload)

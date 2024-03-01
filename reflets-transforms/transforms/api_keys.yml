@@ -1,0 +1,4 @@
+
+# Base parameters for the Pappers API
+pappers:
+  api_key: "PUT_YOUR_API_KEY_HERE"
