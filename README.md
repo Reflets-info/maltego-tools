@@ -1,5 +1,7 @@
 ![A transform provided by http://reflets.info/](./images/banner.svg?raw=true "Reflets.info")
 
+[<img src="./images/cagnotte.png">](https://donorbox.org/reflets-2)
+
 # Reflets.info Maltego Transforms
 
 Hello community ! In this repository, you will find several Maltego Transforms designed to help investigative journalism.
