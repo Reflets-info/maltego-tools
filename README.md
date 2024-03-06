@@ -10,7 +10,7 @@ Currently, you will find the following transforms :
 
  - Pappers.fr Transform: an exploration tool that extracts information on companies in France from the Pappers.fr databases and creates a graph based on this data.
 
- ## The stories
+## The stories
 
  Before getting to the technical stuff, if you want to learn with fun how these OSINT tools are working, you can read the following stories from real world : 
 
@@ -20,8 +20,12 @@ Currently, you will find the following transforms :
  
 ### Maltego
  
- You must download Maltego from https://www.maltego.com/downloads/. You can use the free version (Maltego Community) by creating an account on the Maltego website.
- These transforms have been tested with Maltego 4.6.0.
+You must download Maltego from https://www.maltego.com/downloads/. These transforms have been tested with **Maltego 4.6.0**.
+You can use the free version (Maltego Community) by creating an account on the Maltego website. In Community version, Maltego will have some limitations :
+
+ - you will only have access to a limited set of public tranforms. 
+ - Furthermore, calling transforms **will be limited to creating 12 entities (results)**. We have optimized the result to gather the most important ones but this is a limitation. 
+ 
  
 ### Python maltego-trx library
  
@@ -45,8 +49,17 @@ Go to the directory, create the virtual environnement and install the dependenci
      python3 -m venv venv_reflets
      source ./venv_reflets/bin/activate
      pip3 install -r requirements.txt
+
+#### Update the project
+
+To update the project, got to the git directory and update the code : 
+
+     cd investigation_tools/maltego-tools/
+     git pull
      
 ### Configure your Maltego
+
+**WARNING** : if you update the project, you must first start you Maltego and clean the old config to be sure that the new configuration will be ok. You must go to the "Tranforms" / "Transform Manager" to delete the old transforms (CompanyPappers, PersonPappers). Then you must got to "Entities" / "Manage entities" and delete the old entities : DetailedCompany, HeadquartersAdress, Dirigeant.
 
 You must import the Maltego configuration in the "Import | Export" tab, option "Import Config". The configuration file you have to import is located here :
 
@@ -67,6 +80,8 @@ To be able to use the Pappers.fr, you must register on their website : https://w
 You can access to the API key in the following URL : https://www.pappers.fr/mon-compte/api. Here, you will also be able to monitor your API consumption.
 
 Then, open the configuration file located in "investigation-tools/maltego-tools/reflets-transforms/transforms/api_keys.yml". You will see a string "PUT_YOUR_API_KEY_HERE". You can replace this string with your API KEY.
+
+**WARNING** : some users have tell us that you need a company email (not gmail) to create a developper access to the Maltego API.
        
 You are ready to go !
 
