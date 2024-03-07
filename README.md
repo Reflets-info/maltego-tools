@@ -81,7 +81,7 @@ You can access to the API key in the following URL : https://www.pappers.fr/mon-
 
 Then, open the configuration file located in "investigation-tools/maltego-tools/reflets-transforms/transforms/api_keys.yml". You will see a string "PUT_YOUR_API_KEY_HERE". You can replace this string with your API KEY.
 
-**WARNING** : some users have tell us that you need a company email (not gmail) to create a developper access to the Maltego API.
+**WARNING** : some users have tell us that you need a company email (not gmail) to create a developer access to the Maltego API.
        
 You are ready to go !
 
