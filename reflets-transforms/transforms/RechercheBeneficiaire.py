@@ -1,7 +1,8 @@
+# This Maltego Transformer is designed perform search of a BENEFICIARY in the Pappers FR V2 API
+
 import copy
 import json
 import sys
-import yaml
 
 from transforms import papperparse
 
@@ -43,7 +44,7 @@ class RechercheBeneficiaire(DiscoverableTransform):
                 payload['page'] = current_page
 
                 json_res = papperparse.make_request("https://api.pappers.fr/v2/recherche-beneficiaires", payload)
-                #sys.stderr.write(f"Response: {json.dumps(json_res, indent=4)}")
+                sys.stderr.write(f"Response: {json.dumps(json_res, indent=4)}")
 
                 # Get the number of pages to browse
                 if limit_page is None : 
@@ -72,7 +73,7 @@ class RechercheBeneficiaire(DiscoverableTransform):
 
                     # Auto-qualification of the calling entity to be able to update it.
                     try : 
-                        entity = papperparse.parse_dirigeant( response , dirigeant )            
+                        entity = papperparse.auto_parse_dirigeant( request, response , dirigeant )            
                     except Exception as e :
                         sys.stderr.write(f"Error: {e}\n")
                         sys.stderr.write(f"Problem in the main result parsing for auto-qualification\n")
